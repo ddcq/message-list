@@ -1,0 +1,22 @@
+// import react-md variable overrides
+@import "./variables";
+
+@import "variables";
+@import "~@react-md/icon/dist/mixins";
+@import "~@react-md/layout/dist/mixins";
+@import "~@react-md/states/dist/mixins";
+@import "~@react-md/theme/dist/mixins";
+@import "~@react-md/typography/dist/mixins";
+@import "~@react-md/utils/dist/mixins";
+
+@include react-md-utils;
+// generate all react-md styles with the custom theme
+@import "react-md/dist/styles";
+
+/*
+@media (prefers-color-scheme: dark) {
+  :root {
+    @include rmd-theme-dark;
+  }
+}
+*/
