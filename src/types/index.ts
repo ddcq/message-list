@@ -4,7 +4,7 @@ export enum VISIBILITY {
 };
 
 export interface Message {
-    id: number,
+    id?: number,
     text: string,
     visibility: VISIBILITY,
 };

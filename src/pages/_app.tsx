@@ -7,7 +7,16 @@ import '../styles/app.scss'
 import { wrapper } from '../store'
 
 import App, { AppInitialProps, AppContext } from 'next/app';
-class MyApp extends App<AppInitialProps> {
+import { connect } from 'react-redux'
+import { selectLoading } from '../store/messages/selectors'
+import RootState from '../store/root-state'
+import { CircularProgress } from 'react-md'
+
+type AppProps = AppInitialProps & {
+  loading: boolean
+}
+
+class MyApp extends App<AppProps> {
 
   public static getInitialProps = async ({ Component, ctx }: AppContext) => {
 
@@ -25,7 +34,7 @@ class MyApp extends App<AppInitialProps> {
   };
 
   public render() {
-    const { Component, pageProps } = this.props;
+    const { Component, pageProps, loading } = this.props;
 
     return (
       <Layout>
@@ -38,11 +47,18 @@ class MyApp extends App<AppInitialProps> {
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500:700&display=swap" />
         </Head>
-        <Component {...pageProps} />
+        {loading ? (
+          <CircularProgress id="mc-submit-progress" centered={false} />
+        ) : (
+          <Component {...pageProps} />
+        )}
       </Layout>
     );
   }
 }
 
+const mapStateToProps = (state: RootState) => ({
+  loading: selectLoading(state) || false
+})
 
-export default wrapper.withRedux(MyApp);
+export default wrapper.withRedux(connect(mapStateToProps)(MyApp));

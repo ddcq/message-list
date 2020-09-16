@@ -26,26 +26,27 @@ export async function fetchMessagesAsync(store: Store<RootState, AnyAction>) {
         });
 }
 
-export async function addMessageAsync(store: Store<RootState, AnyAction>, message: Message) {
-    store.dispatch(addMessages.started(message))
-    return postMessage(message)
-        .then((messages) => {
-            store.dispatch(
-                addMessages.done({
-                    params: message,
-                    result: messages,
-                })
-            )
-        })
-        .catch((e) => {
-            store.dispatch(
-                addMessages.failed({
-                    params: message,
-                    error: e.message,
-                })
-            );
-        });
-}
+export const addMessageAsync = (message: Message) =>
+    (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
+        dispatch(addMessages.started(message))
+        return postMessage(message)
+            .then((messages) => {
+                dispatch(
+                    addMessages.done({
+                        params: message,
+                        result: messages,
+                    })
+                )
+            })
+            .catch((e) => {
+                dispatch(
+                    addMessages.failed({
+                        params: message,
+                        error: e.message,
+                    })
+                );
+            });
+    }
 
 export const removeMessageAsync = (message: Message) =>
     (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
