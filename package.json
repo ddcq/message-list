@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "mocha -r ts-node/register src/**/__tests/*.spec.ts"
+    "test": "ts-mocha -r ts-node/register src/**/__tests/*.spec.ts"
   },
   "dependencies": {
     "@react-md/icon": "^2.3.0",
@@ -15,6 +15,7 @@
     "@react-md/theme": "^2.3.0",
     "@react-md/typography": "^2.3.0",
     "@types/classnames": "^2.2.10",
+    "@types/react-test-renderer": "^16.9.3",
     "axios": "^0.20.0",
     "classnames": "^2.2.6",
     "immer": "^7.0.9",
@@ -25,6 +26,7 @@
     "react-hook-form": "^6.8.2",
     "react-md": "^2.1.1",
     "react-redux": "^7.2.1",
+    "react-test-renderer": "^16.13.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0"
   },

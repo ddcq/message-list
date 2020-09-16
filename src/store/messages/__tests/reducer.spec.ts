@@ -1,8 +1,9 @@
 import { expect } from "chai";
 import faker from "faker";
 import { AnyAction } from "typescript-fsa";
+import { Message, VISIBILITY } from "../../../types";
 
-import { fetchMessages } from "../actions";
+import { fetchMessages, MessagesAction } from "../actions";
 import reducer from "../reducer";
 import MessagesState from "../state";
 
@@ -20,10 +21,7 @@ describe('messages reducer', () => {
         let result: MessagesState;
         const error = faker.random.words();
         beforeEach(() => {
-            result = reducer(undefined, {
-                type: fetchMessages.failed,
-                payload: { error }
-            } as AnyAction);
+            result = reducer(undefined, fetchMessages.failed({ params: {}, error }));
         })
         it('sets the loading flag', () => {
             expect(result.loading).to.be.false;
@@ -34,12 +32,9 @@ describe('messages reducer', () => {
     });
     describe('on done', () => {
         let result: MessagesState;
-        const messages = [{ message: faker.random.words() }];
+        const messages: Message[] = [{ text: faker.random.words(), visibility: VISIBILITY.PUBLIC }];
         beforeEach(() => {
-            result = reducer(undefined, {
-                type: fetchMessages.done,
-                payload: { result: messages }
-            } as AnyAction);
+            result = reducer(undefined, fetchMessages.done({ params: {}, result: messages }));
         })
         it('sets the loading flag', () => {
             expect(result.loading).to.be.false;

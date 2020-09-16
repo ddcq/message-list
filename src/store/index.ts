@@ -29,5 +29,5 @@ const makeStore: MakeStore<RootState> = (_context: Context) => createStore(
 // export an assembled wrapper
 export const wrapper = createWrapper<RootState>(makeStore, {debug: true});
 
-export type AppThunk<T> = ThunkAction<T, RootState, unknown, Action<string>>
-export type AppThunkDispatch = ThunkDispatch<RootState, unknown, Action<string>>
+export type AppThunk<T> = ThunkAction<T, RootState, {}, Action<string>>
+export type AppThunkDispatch = ThunkDispatch<RootState, {}, Action<string>>

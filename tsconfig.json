@@ -10,6 +10,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
+    "noImplicitAny": false,
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
