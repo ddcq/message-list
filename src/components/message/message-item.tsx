@@ -3,12 +3,12 @@ import { DeleteSVGIcon, ListItem, LockSVGIcon } from 'react-md';
 import { Message, VISIBILITY } from '../../types';
 import Container from '../container';
 
-interface Props {
+export interface MessageItemProps {
     message: Message;
     onDelete: Function;
 }
 
-export default function MessageItem({ onDelete, message }: Props): ReactElement {
+export default function MessageItem({ onDelete, message }: MessageItemProps): ReactElement {
     const handleDelete = () => {
         onDelete(message);
     };

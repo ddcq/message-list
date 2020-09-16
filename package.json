@@ -7,7 +7,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "test": "ts-mocha -r ts-node/register src/**/__tests/*.spec.ts"
+    "test": "ts-mocha -r ignore-styles -r ts-node/register src/**/__tests/*.spec.ts"
   },
   "dependencies": {
     "@react-md/icon": "^2.3.0",
@@ -52,6 +52,7 @@
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.1.2",
     "faker": "^5.1.0",
+    "ignore-styles": "^5.0.1",
     "mocha": "^8.1.3",
     "node-sass": "^4.14.1",
     "prettier": "^2.1.1",

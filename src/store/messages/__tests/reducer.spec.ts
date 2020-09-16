@@ -1,11 +1,10 @@
 import { expect } from "chai";
 import faker from "faker";
-import { AnyAction } from "typescript-fsa";
 import { Message, VISIBILITY } from "../../../types";
-
-import { fetchMessages, MessagesAction } from "../actions";
+import { fetchMessages } from "../actions";
 import reducer from "../reducer";
 import MessagesState from "../state";
+
 
 describe('messages reducer', () => {
     describe('on start', () => {
