@@ -10,7 +10,7 @@ import App, { AppInitialProps, AppContext } from 'next/app';
 import { connect } from 'react-redux'
 import { selectLoading } from '../store/messages/selectors'
 import RootState from '../store/root-state'
-import { CircularProgress } from 'react-md'
+import { CircularProgress, Overlay } from 'react-md'
 
 type AppProps = AppInitialProps & {
   loading: boolean
@@ -47,11 +47,11 @@ class MyApp extends App<AppProps> {
           <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500:700&display=swap" />
         </Head>
-        {loading ? (
-          <CircularProgress id="mc-submit-progress" centered={false} />
-        ) : (
-          <Component {...pageProps} />
-        )}
+        <Overlay id="app-overlay" visible={loading} portal onRequestClose={() => {}}
+        >
+          <CircularProgress id="mc-submit-progress" centered />
+        </Overlay>
+        <Component {...pageProps} />
       </Layout>
     );
   }
