@@ -6,12 +6,14 @@ import {
   FormMessage,
   TextArea,
 } from "@react-md/form";
+import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { Text, TextContainer } from "react-md";
 import { useDispatch } from "react-redux";
 import { addMessageAsync } from "../actions/messages";
 import Container from "../components/container";
+import { AppThunkDispatch } from "../store";
 import { VISIBILITY } from "../types";
 
 interface FormData {
@@ -28,12 +30,15 @@ export default function MessageCreate(): ReactElement {
   } = useForm<FormData>({ mode: "onChange" });
 
 
-  const dispatch = useDispatch();
+  const dispatch: AppThunkDispatch = useDispatch();
+  const router = useRouter();
   const doSubmit = (data: FormData) => {
-    (addMessageAsync({
+    dispatch(addMessageAsync({
       text: data?.text || "<No message>",
       visibility: data?.private === "yes" ? VISIBILITY.PRIVATE : VISIBILITY.PUBLIC
-    }))(dispatch).then
+    })).then(() => {
+      router.push("/");
+    })
   };
 
   return (
@@ -85,7 +90,6 @@ export default function MessageCreate(): ReactElement {
               id="mc-reset"
               type="reset"
               theme="secondary"
-              themeType="outline"
             >
               Effacer
           </Button>
@@ -93,7 +97,6 @@ export default function MessageCreate(): ReactElement {
               id="mc-submit"
               type="submit"
               theme="primary"
-              themeType="outline"
             >
               Ajouter
           </Button>

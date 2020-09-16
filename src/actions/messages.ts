@@ -2,6 +2,7 @@ import { AnyAction, Store } from "redux";
 import { ThunkDispatch } from "redux-thunk";
 import { AsyncActionCreators } from "typescript-fsa";
 import { deleteAllMessages, deleteMessage, getMessages, postMessage } from "../api/messages"
+import { AppThunk } from "../store";
 import { fetchMessages, removeMessage, addMessages, removeAllMessages } from "../store/messages/actions"
 import RootState from "../store/root-state";
 import { Message } from "../types";
@@ -27,7 +28,7 @@ export async function fetchMessagesAsync(store: Store<RootState, AnyAction>) {
         });
 }
 
-export const addMessageAsync = (message: Message) =>
+export const addMessageAsync = (message: Message): AppThunk<Promise<void>> =>
     (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
         dispatch(addMessages.started(message))
         return postMessage(message)
