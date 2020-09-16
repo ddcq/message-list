@@ -1,6 +1,7 @@
-import React, { ReactElement, useCallback, useState } from 'react';
-import { CircularProgress, DeleteSVGIcon, ListItem } from 'react-md';
-import { Message } from '../../types';
+import React, { ReactElement } from 'react';
+import { DeleteSVGIcon, ListItem, LockSVGIcon } from 'react-md';
+import { Message, VISIBILITY } from '../../types';
+import Container from '../container';
 
 interface Props {
     message: Message;
@@ -8,15 +9,21 @@ interface Props {
 }
 
 export default function MessageItem({ onDelete, message }: Props): ReactElement {
-    const [loading, setLoading] = useState(false);
-    const handleDelete = useCallback(() => {
-        setLoading(true);
-        onDelete(message).then(() => {
-            setLoading(false);
-        });
-    }, [loading]);
-    return <ListItem
-        rightAddon={loading ? <CircularProgress id="dm-circular"/> : <DeleteSVGIcon onClick={handleDelete} />}>
-        {message.text}
-    </ListItem>;
+    const handleDelete = () => {
+        onDelete(message);
+    };
+    return (
+        <Container>
+            <ListItem
+                rightAddon={<DeleteSVGIcon onClick={handleDelete} />}
+                leftAddon={message.visibility === VISIBILITY.PRIVATE && <LockSVGIcon />}
+            >
+                {
+                    message.visibility === VISIBILITY.PRIVATE
+                        ? (<i>{message.text}</i>)
+                        : message.text
+                }
+            </ListItem>
+        </Container>
+    );
 }

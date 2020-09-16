@@ -4,7 +4,6 @@ import React, { ReactElement } from 'react'
 import { Button, DialogFooter, Text, TextContainer } from 'react-md'
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchMessagesAsync, removeAllMessagesAsync } from '../actions/messages';
-import Container from '../components/container';
 import MessageList from '../components/message/message-list'
 import { wrapper } from '../store';
 import { selectMessages } from '../store/messages/selectors';
@@ -44,10 +43,8 @@ export default function Messages(): ReactElement {
           Créer un nouveau message
         </Button>
       </DialogFooter>
-      <Container>
         {messages && !!messages.length && <MessageList messages={messages} />}
         {messages && !messages.length && <Text type="headline-5">Aucun message</Text>}
-      </Container>
     </TextContainer>
   )
 }

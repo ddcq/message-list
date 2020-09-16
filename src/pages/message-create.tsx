@@ -4,7 +4,7 @@ import {
   Checkbox,
   Form,
   FormMessage,
-  TextArea,
+  TextArea
 } from "@react-md/form";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
@@ -18,7 +18,7 @@ import { VISIBILITY } from "../types";
 
 interface FormData {
   text?: string;
-  private?: "yes" | "";
+  private?: boolean;
 }
 
 export default function MessageCreate(): ReactElement {
@@ -35,7 +35,7 @@ export default function MessageCreate(): ReactElement {
   const doSubmit = (data: FormData) => {
     dispatch(addMessageAsync({
       text: data?.text || "<No message>",
-      visibility: data?.private === "yes" ? VISIBILITY.PRIVATE : VISIBILITY.PUBLIC
+      visibility: data?.private ? VISIBILITY.PRIVATE : VISIBILITY.PUBLIC
     })).then(() => {
       router.push("/");
     })
@@ -49,7 +49,7 @@ export default function MessageCreate(): ReactElement {
           onReset={() => {
             reset({
               text: "",
-              private: "",
+              private: false,
             });
           }}
           onSubmit={handleSubmit(doSubmit)}
@@ -64,7 +64,6 @@ export default function MessageCreate(): ReactElement {
                 message: "La taille maximale est de 500 caractères",
               },
             }}
-            id="mc-text-controller"
             aria-describedby="mc-text-error"
             name="text"
             label="Contenu du message "
@@ -77,13 +76,20 @@ export default function MessageCreate(): ReactElement {
           </FormMessage>
 
           <Controller
-            as={Checkbox}
+            // as={Checkbox}
             control={control}
-            id="mc-private"
             name="private"
-            label="Ce message est privé"
             defaultValue=""
             defaultChecked={false}
+            render={({ onChange, value, name }) => (
+              <Checkbox
+                label="Ce message est privé"
+                id="mc-private"
+                onChange={e => onChange(e.target.checked)}
+                checked={value}
+                name={name}
+              />
+            )}
           />
           <DialogFooter align="end">
             <Button
