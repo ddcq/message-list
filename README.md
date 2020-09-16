@@ -1,6 +1,6 @@
 # Message List
 
-This application is a simple [ReactMD](https://github.com/mlaursen/react-md), [Next.js](https://nextjs.org/), and Typescript
+This application is a simple [ReactMD](https://github.com/mlaursen/react-md), [Next.js](https://nextjs.org/), and Typescript.
 app featuring:
 
 - [\_variables.scss](./styles/_variables.scss) to override the default
@@ -16,6 +16,9 @@ For more information about ReactMD's features, styling, components, and API, che
 the [main documentation](https://react-md.dev). You can also view the
 [documentation site's source code](https://github.com/mlaursen/react-md/tree/master/packages/documentation)
 for a more complex example of using ReactMD + Next.js.
+## API
+
+[getsandbox API](https://getsandbox.com/p/1/eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJzLWI3N2UzNGI5LTVlZDctNDIzYS1iNzJhLWU5OWFlNDA3ZTk1OCJ9.4vh2iPmtQjQ1mVpnPgCtVRqAnt44N4xIYZrRL1-eV04)
 
 ## Run a development local server
 
@@ -29,7 +32,7 @@ npm run dev
 
 ## Create a deployable production server
 
-Build a production version of the web application :
+B uild a production version of the web application :
 
 ```bash
 npx next build
