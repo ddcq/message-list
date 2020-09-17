@@ -80,7 +80,7 @@ export default function MessageCreate(): ReactElement {
             render={({ onChange, value, name }) => (
               <Checkbox
                 label="Ce message est privé"
-                id="mc-private"
+                id="mc-private-chk"
                 onChange={(e) => onChange(e.target.checked)}
                 checked={value}
                 name={name}
@@ -88,10 +88,13 @@ export default function MessageCreate(): ReactElement {
             )}
           />
           <DialogFooter align="end">
-            <Button id="mc-reset" type="reset" theme="secondary">
+            <Button id="mc-back-btn" type="button" theme="clear" onClick={() => router.push('/')}>
+              Retour vers la liste des messages
+            </Button>
+            <Button id="mc-reset-btn" type="reset" theme="secondary">
               Effacer
             </Button>
-            <Button id="mc-submit" type="submit" theme="primary">
+            <Button id="mc-submit-btn" type="submit" theme="primary">
               Ajouter
             </Button>
           </DialogFooter>
