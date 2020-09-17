@@ -1,41 +1,12 @@
-import React, { ReactElement, ReactNode } from 'react'
 import { useRouter } from 'next/router'
+import React, { ReactElement, ReactNode } from 'react'
 import {
-  Layout as RMDLayout,
-  Configuration,
-  ConfigurableIcons,
-  useLayoutNavigation,
-  ArrowDropDownSVGIcon,
-  CheckBoxSVGIcon,
-  FileDownloadSVGIcon,
-  KeyboardArrowDownSVGIcon,
-  KeyboardArrowLeftSVGIcon,
-  KeyboardArrowRightSVGIcon,
-  MenuSVGIcon,
-  NotificationsSVGIcon,
-  RadioButtonCheckedSVGIcon,
-  RemoveRedEyeSVGIcon,
-  ArrowUpwardSVGIcon,
-  CheckSVGIcon,
+  Configuration, Layout as RMDLayout,
+  useLayoutNavigation
 } from 'react-md'
-
 import LinkUnstyled from '../LinkUnstyled'
 import navItems from './navItems'
 
-const icons: ConfigurableIcons = {
-  back: <KeyboardArrowLeftSVGIcon />,
-  checkbox: <CheckBoxSVGIcon />,
-  dropdown: <ArrowDropDownSVGIcon />,
-  download: <FileDownloadSVGIcon />,
-  expander: <KeyboardArrowDownSVGIcon />,
-  forward: <KeyboardArrowRightSVGIcon />,
-  menu: <MenuSVGIcon />,
-  notification: <NotificationsSVGIcon />,
-  radio: <RadioButtonCheckedSVGIcon />,
-  password: <RemoveRedEyeSVGIcon />,
-  selected: <CheckSVGIcon />,
-  sort: <ArrowUpwardSVGIcon />,
-}
 
 interface LayoutProps {
   children: ReactNode
@@ -47,9 +18,9 @@ export default function Layout({ children }: LayoutProps): ReactElement {
   const { pathname } = useRouter()
 
   return (
-    <Configuration icons={icons}>
+    <Configuration>
       <RMDLayout
-        title="Denis Declercq"
+        title="DDCQ Messages"
         navHeaderTitle="Menu"
         tabletLayout="temporary"
         landscapeTabletLayout="temporary"

@@ -1,24 +1,19 @@
-import { Button } from "@react-md/button";
-import { DialogFooter } from "@react-md/dialog";
-import {
-  Checkbox,
-  Form,
-  FormMessage,
-  TextArea
-} from "@react-md/form";
-import { useRouter } from "next/router";
-import React, { ReactElement } from "react";
-import { Controller, useForm } from "react-hook-form";
-import { Text, TextContainer } from "react-md";
-import { useDispatch } from "react-redux";
-import { addMessageAsync } from "../actions/messages";
-import Container from "../components/container";
-import { AppThunkDispatch } from "../store";
-import { VISIBILITY } from "../types";
+import { Button } from '@react-md/button'
+import { DialogFooter } from '@react-md/dialog'
+import { Checkbox, Form, FormMessage, TextArea } from '@react-md/form'
+import { useRouter } from 'next/router'
+import React, { ReactElement } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import { Text, TextContainer } from 'react-md'
+import { useDispatch } from 'react-redux'
+import { addMessageAsync } from '../actions/messages'
+import Container from '../components/container'
+import { AppThunkDispatch } from '../store'
+import { VISIBILITY } from '../types'
 
 interface FormData {
-  text?: string;
-  private?: boolean;
+  text?: string
+  private?: boolean
 }
 
 export default function MessageCreate(): ReactElement {
@@ -27,19 +22,20 @@ export default function MessageCreate(): ReactElement {
     reset,
     handleSubmit,
     errors: { text },
-  } = useForm<FormData>({ mode: "onChange" });
+  } = useForm<FormData>({ mode: 'onChange' })
 
-
-  const dispatch: AppThunkDispatch = useDispatch();
-  const router = useRouter();
+  const dispatch: AppThunkDispatch = useDispatch()
+  const router = useRouter()
   const doSubmit = (data: FormData) => {
-    dispatch(addMessageAsync({
-      text: data?.text || "<No message>",
-      visibility: data?.private ? VISIBILITY.PRIVATE : VISIBILITY.PUBLIC
-    })).then(() => {
-      router.push("/");
+    dispatch(
+      addMessageAsync({
+        text: data?.text || '<No message>',
+        visibility: data?.private ? VISIBILITY.PRIVATE : VISIBILITY.PUBLIC,
+      })
+    ).then(() => {
+      router.push('/')
     })
-  };
+  }
 
   return (
     <TextContainer>
@@ -48,9 +44,9 @@ export default function MessageCreate(): ReactElement {
         <Form
           onReset={() => {
             reset({
-              text: "",
+              text: '',
               private: false,
-            });
+            })
           }}
           onSubmit={handleSubmit(doSubmit)}
         >
@@ -58,10 +54,10 @@ export default function MessageCreate(): ReactElement {
             as={<TextArea id="mc-text" animate />}
             control={control}
             rules={{
-              required: "Le texte est obligatoire",
+              required: 'Le texte est obligatoire',
               maxLength: {
                 value: 500,
-                message: "La taille maximale est de 500 caractères",
+                message: 'La taille maximale est de 500 caractères',
               },
             }}
             aria-describedby="mc-text-error"
@@ -85,30 +81,22 @@ export default function MessageCreate(): ReactElement {
               <Checkbox
                 label="Ce message est privé"
                 id="mc-private"
-                onChange={e => onChange(e.target.checked)}
+                onChange={(e) => onChange(e.target.checked)}
                 checked={value}
                 name={name}
               />
             )}
           />
           <DialogFooter align="end">
-            <Button
-              id="mc-reset"
-              type="reset"
-              theme="secondary"
-            >
+            <Button id="mc-reset" type="reset" theme="secondary">
               Effacer
-          </Button>
-            <Button
-              id="mc-submit"
-              type="submit"
-              theme="primary"
-            >
+            </Button>
+            <Button id="mc-submit" type="submit" theme="primary">
               Ajouter
-          </Button>
+            </Button>
           </DialogFooter>
         </Form>
       </Container>
     </TextContainer>
-  );
+  )
 }

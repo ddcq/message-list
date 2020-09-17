@@ -1,89 +1,21 @@
-import { AnyAction, Store } from "redux";
-import { ThunkDispatch } from "redux-thunk";
-import { AsyncActionCreators } from "typescript-fsa";
-import { deleteAllMessages, deleteMessage, getMessages, postMessage } from "../api/messages"
-import { AppThunk } from "../store";
-import { fetchMessages, removeMessage, addMessages, removeAllMessages } from "../store/messages/actions"
-import RootState from "../store/root-state";
-import { Message } from "../types";
-
-export async function fetchMessagesAsync(store: Store<RootState, AnyAction>) {
-    store.dispatch(fetchMessages.started({}))
-    return getMessages()
-        .then((messages) => {
-            store.dispatch(
-                fetchMessages.done({
-                    params: {},
-                    result: messages,
-                })
-            )
-        })
-        .catch((e) => {
-            store.dispatch(
-                fetchMessages.failed({
-                    params: {},
-                    error: e.message,
-                })
-            );
-        });
-}
-
-export const addMessageAsync = (message: Message): AppThunk<Promise<void>> =>
-    (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-        dispatch(addMessages.started(message))
-        return postMessage(message)
-            .then((messages) => {
-                dispatch(
-                    addMessages.done({
-                        params: message,
-                        result: messages,
-                    })
-                )
-            })
-            .catch((e) => {
-                dispatch(
-                    addMessages.failed({
-                        params: message,
-                        error: e.message,
-                    })
-                );
-            });
-    }
-
-export const removeMessageAsync = (message: Message) =>
-    (dispatch: ThunkDispatch<{}, {}, AnyAction>) => {
-        dispatch(removeMessage.started(message))
-        return deleteMessage(message)
-            .then((messages) => {
-                dispatch(
-                    removeMessage.done({
-                        params: message,
-                        result: messages,
-                    })
-                )
-            })
-            .catch((e) => {
-                dispatch(
-                    removeMessage.failed({
-                        params: message,
-                        error: e.message,
-                    })
-                );
-            });
-    }
-
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AsyncActionCreators } from 'typescript-fsa';
+import { deleteAllMessages, deleteMessage, getMessages, postMessage } from '../api/messages';
+import { addMessages, fetchMessages, removeAllMessages, removeMessage } from '../store/messages/actions';
+import { Message } from '../types';
 
 const callAsync = (
-    apiFunc: () => Promise<Message[]>,
-    actionCreator: AsyncActionCreators<Message | {}, Message[], string>
+    apiFunc: (arg0?: Message) => Promise<Message[]>,
+    actionCreator: AsyncActionCreators<Message, Message[], string> | AsyncActionCreators<{}, Message[], string>
 ) => (
-    message?: Message | {}
+    message?: Message
 ) => (
     dispatch: ThunkDispatch<{}, {}, AnyAction>
 ) => {
-    const params = message || {};
+    const params = message || {} as Message;
     dispatch(actionCreator.started(params));
-    return apiFunc()
+    return apiFunc(message)
         .then((messages) => {
             dispatch(actionCreator.done({ params, result: messages }))
         })
@@ -92,4 +24,7 @@ const callAsync = (
         });
 }
 
+export const fetchMessagesAsync = callAsync(getMessages, fetchMessages);
+export const addMessageAsync = callAsync(postMessage, addMessages);
+export const removeMessageAsync = callAsync(deleteMessage, removeMessage);
 export const removeAllMessagesAsync = callAsync(deleteAllMessages, removeAllMessages);

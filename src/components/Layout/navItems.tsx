@@ -29,11 +29,8 @@ function createRoute(
 }
 
 const navItems: LayoutNavigationTree = {
-//  '/': createRoute('/', 'Home', <HomeSVGIcon />),
   '/': createRoute('/', 'Liste des messages', <QuestionAnswerFontIcon />),
   '/message-create': createRoute('/message-create', 'Créer un message', <PlusOneFontIcon />),
-//  '/users': createRoute('/about', 'Liste des utilisateurs', <PeopleFontIcon />),
-//  '/users-create': createRoute('/skills', 'Créer un utilisateur', <QuestionAnswerFontIcon />),
   '/about': createRoute('/about', 'A propos...', <WorkSVGIcon />),
 }
 

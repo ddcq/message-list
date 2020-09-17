@@ -24,13 +24,7 @@ export default function LinkUnstyled({
   }
 
   return (
-    <Link
-      shallow={shallow}
-      scroll={scroll}
-      replace={replace}
-      href={href}
-      as={as}
-    >
+    <Link shallow={shallow} scroll={scroll} replace={replace} href={href} as={as}>
       <a {...props}>{children}</a>
     </Link>
   )
