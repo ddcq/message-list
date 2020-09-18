@@ -1,14 +1,20 @@
 # Message List
 
 This application is a simple application to list messages and add new messages. It's based on [ReactMD](https://github.com/mlaursen/react-md), [Next.js](https://nextjs.org/), and Typescript.
-app featuring:
 
-- [\_variables.scss](./styles/_variables.scss) to override the default
-  `react-md` theme and feature toggles
-- [app.scss](./styles/app.scss) global styles that conditionally apply the dark theme
-  based on the user's OS preferences
-- [\_app.tsx](./pages/_app.tsx) uses a persistent layout. Do implement here the common feature of all pages, like `css` and `script` imports.
-- [Layout.tsx](./components/Layout/Layout.tsx) that initializes the `Layout` component from `react-md` with navigation items
+directories:
+
+-   [actions](./src/actions) contains the high level services called by the UI
+-   [api](./src/api) contains the call function to the API
+
+important files:
+
+-   [\_variables.scss](./src/styles/_variables.scss) to override the default
+    `react-md` theme and feature toggles
+-   [app.scss](./src/styles/app.scss) global styles that conditionally apply the dark theme
+    based on the user's OS preferences
+-   [\_app.tsx](./src/pages/_app.tsx) uses a persistent layout. Do implement here the common feature of all pages, like `css` and `script` imports.
+-   [Layout.tsx](./src/components/Layout/Layout.tsx) that initializes the `Layout` component from `react-md` with navigation items
 
 For more information about ReactMD's features, styling, components, and API, check out
 the [main documentation](https://react-md.dev).
@@ -80,6 +86,6 @@ npm run start
 
 A list of the next features that can be implemented.
 
-* e2e tests
-* static html export with next
-* preload message-create page
+-   e2e tests
+-   static html export with next
+-   preload message-create page
