@@ -8,4 +8,4 @@ export const addMessage = actionCreator.async<Message, Message[], string>('ADD_M
 export const removeMessage = actionCreator.async<Message, Message[], string>('DELETE_MESSAGE');
 export const removeAllMessages = actionCreator.async<{}, Message[], string>('DELETE_All_MESSAGES');
 
-export type MessagesAction = AsyncAction<{}, Message[], string> | AsyncAction<Message, Message[], string>;
+export type MessagesAction = AsyncAction<unknown, Message[], string> | AsyncAction<Message, Message[], string>;

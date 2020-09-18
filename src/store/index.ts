@@ -4,6 +4,7 @@ import thunk, { ThunkAction, ThunkDispatch } from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './root-reducer';
 import RootState from './root-state';
+import { MessagesAction } from './messages/actions';
 
 const logger: Middleware = ({ getState }) => {
 	return (next) => (action) => {
@@ -21,11 +22,12 @@ const logger: Middleware = ({ getState }) => {
 };
 
 // create a makeStore function
-const makeStore: MakeStore<RootState> = (_context: Context) =>
-	createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+const makeStore: MakeStore<RootState, MessagesAction> = (_context: Context) => {
+	return createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, logger)));
+};
 
 // export an assembled wrapper
-export const wrapper = createWrapper<RootState>(makeStore, { debug: true });
+export const wrapper = createWrapper<RootState, MessagesAction>(makeStore, { debug: true });
 
 export type AppThunk<T> = ThunkAction<T, RootState, {}, Action<string>>;
 export type AppThunkDispatch = ThunkDispatch<RootState, {}, Action<string>>;

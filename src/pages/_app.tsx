@@ -47,7 +47,14 @@ class MyApp extends App<AppProps> {
 						href="https://fonts.googleapis.com/css?family=Roboto:400,500:700&display=swap"
 					/>
 				</Head>
-				<Overlay id="app-overlay" visible={loading} portal onRequestClose={() => {}}>
+				<Overlay
+					id="app-overlay"
+					visible={loading}
+					portal
+					onRequestClose={() => {
+						alert("Patientez, s'il vous plaît. Les données sont en cours de chargement...");
+					}}
+				>
 					<CircularProgress id="mc-submit-progress" centered />
 				</Overlay>
 				<Component {...pageProps} />
