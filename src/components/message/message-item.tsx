@@ -12,13 +12,22 @@ export default function MessageItem({ onDelete, message }: MessageItemProps): Re
 	const handleDelete = () => {
 		onDelete(message);
 	};
+	const isPrivate = message.visibility === VISIBILITY.PRIVATE;
 	return (
 		<Container>
 			<SimpleListItem
-				rightAddon={<DeleteSVGIcon onClick={handleDelete} />}
-				leftAddon={message.visibility === VISIBILITY.PRIVATE && <LockSVGIcon />}
+				rightAddon={
+					<DeleteSVGIcon
+						style={{
+							marginLeft: 'auto',
+						}}
+						onClick={handleDelete}
+					/>
+				}
+				leftAddon={isPrivate && <LockSVGIcon />}
+				id={'message-item-' + message.id}
 			>
-				{message.visibility === VISIBILITY.PRIVATE ? <i>{message.text}</i> : message.text}
+				{isPrivate ? <i>{message.text}</i> : message.text}
 			</SimpleListItem>
 		</Container>
 	);
