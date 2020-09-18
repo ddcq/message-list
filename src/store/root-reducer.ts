@@ -3,12 +3,13 @@ import RootState from './root-state'
 
 import messages from './messages/reducer'
 import { HYDRATE } from 'next-redux-wrapper'
+import { MessagesAction } from './messages/actions'
 
 const combinedReducer = combineReducers<RootState>({
   messages,
 })
 
-const reducer: Reducer<RootState, AnyAction> = (
+const reducer: Reducer<RootState, MessagesAction> = (
   state: RootState | undefined,
   action: AnyAction
 ) => {

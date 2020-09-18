@@ -4,7 +4,7 @@ import { Message } from '../../types'
 const actionCreator = actionCreatorFactory('ddcq:message-list:message')
 
 export const fetchMessages = actionCreator.async<{}, Message[], string>('FETCH_MESSAGES')
-export const addMessages = actionCreator.async<Message, Message[], string>('ADD_MESSAGES')
+export const addMessage = actionCreator.async<Message, Message[], string>('ADD_MESSAGE')
 export const removeMessage = actionCreator.async<Message, Message[], string>('DELETE_MESSAGE')
 export const removeAllMessages = actionCreator.async<{}, Message[], string>('DELETE_All_MESSAGES')
 
