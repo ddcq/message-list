@@ -6,22 +6,20 @@ import RootState from '../store/root-state';
 import { Message } from '../types';
 
 const callAsync = (
-    apiFunc: (arg0?: Message) => Promise<Message[]>,
-    actionCreator: AsyncActionCreators<Message, Message[], string> | AsyncActionCreators<{}, Message[], string>
-) => (
-    message?: Message
-) => (
-    dispatch: ThunkDispatch<RootState, undefined, MessagesAction>
-) => {
-    const params = message || {} as Message;
-    dispatch(actionCreator.started(params));
-    return apiFunc(message)
-        .then((messages) => {
-            dispatch(actionCreator.done({ params, result: messages }))
-        }, (e) => {
-            dispatch(actionCreator.failed({ params, error: e.message }));
-        });
-}
+	apiFunc: (arg0?: Message) => Promise<Message[]>,
+	actionCreator: AsyncActionCreators<Message, Message[], string> | AsyncActionCreators<{}, Message[], string>
+) => (message?: Message) => (dispatch: ThunkDispatch<RootState, undefined, MessagesAction>) => {
+	const params = message || ({} as Message);
+	dispatch(actionCreator.started(params));
+	return apiFunc(message).then(
+		(messages) => {
+			dispatch(actionCreator.done({ params, result: messages }));
+		},
+		(e) => {
+			dispatch(actionCreator.failed({ params, error: e.message }));
+		}
+	);
+};
 
 export const fetchMessagesAsync = () => callAsync(getMessages, fetchMessages)(undefined);
 export const addMessageAsync = (message: Message) => callAsync(postMessage, addMessage)(message);

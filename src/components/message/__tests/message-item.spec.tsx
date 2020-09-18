@@ -11,73 +11,73 @@ chai.use(sinonChai);
 const expect = chai.expect;
 
 describe('components/message/message-item', () => {
-	const sandbox = sinon.createSandbox()
-	let onDeleteFake: SinonSpy
+	const sandbox = sinon.createSandbox();
+	let onDeleteFake: SinonSpy;
 	beforeEach(() => {
-		onDeleteFake = sandbox.spy()
-	})
+		onDeleteFake = sandbox.spy();
+	});
 	afterEach(() => {
-		sandbox.reset()
-	})
+		sandbox.reset();
+	});
 	describe('public message', () => {
-		let listItemInstance: renderer.ReactTestInstance
-		const text: string = faker.lorem.text()
+		let listItemInstance: renderer.ReactTestInstance;
+		const text: string = faker.lorem.text();
 		beforeEach(() => {
-			const message: Message = { text, visibility: VISIBILITY.PUBLIC }
-			const rendered = renderer.create(<MessageItem message={message} onDelete={onDeleteFake}/>)
-			listItemInstance = rendered.root.findByType(SimpleListItem)
-		})
+			const message: Message = { text, visibility: VISIBILITY.PUBLIC };
+			const rendered = renderer.create(<MessageItem message={message} onDelete={onDeleteFake} />);
+			listItemInstance = rendered.root.findByType(SimpleListItem);
+		});
 		it('should write the message', () => {
-			expect(listItemInstance.props.children).to.equal(text)
-		})
+			expect(listItemInstance.props.children).to.equal(text);
+		});
 		it('should have a delete icon on the right', () => {
-			expect(listItemInstance.props.rightAddon.type).to.equal(DeleteSVGIcon)
-		})
+			expect(listItemInstance.props.rightAddon.type).to.equal(DeleteSVGIcon);
+		});
 		it('should act on a click on the delete icon', () => {
-			expect(listItemInstance.props.rightAddon.props.onClick).to.exist
-		})
+			expect(listItemInstance.props.rightAddon.props.onClick).to.exist;
+		});
 		it('should not have a lock icon on the left', () => {
-			expect(listItemInstance.props.leftAddon).to.be.false
-		})
+			expect(listItemInstance.props.leftAddon).to.be.false;
+		});
 		describe('click on the delete icon', () => {
 			beforeEach(() => {
-				listItemInstance.props.rightAddon.props.onClick()
-			})
+				listItemInstance.props.rightAddon.props.onClick();
+			});
 			it('should call onDelete function', () => {
-				expect(onDeleteFake).to.have.been.calledOnceWithExactly
-			})
-		})
-	})
+				expect(onDeleteFake).to.have.been.calledOnceWithExactly;
+			});
+		});
+	});
 	describe('private message', () => {
-		let listItemInstance: renderer.ReactTestInstance
-		const text: string = faker.lorem.text()
+		let listItemInstance: renderer.ReactTestInstance;
+		const text: string = faker.lorem.text();
 		beforeEach(() => {
-			const message: Message = { text, visibility: VISIBILITY.PRIVATE }
-			const rendered = renderer.create(<MessageItem message={message} onDelete={onDeleteFake} />)
-			listItemInstance = rendered.root.findByType(SimpleListItem)
-		})
+			const message: Message = { text, visibility: VISIBILITY.PRIVATE };
+			const rendered = renderer.create(<MessageItem message={message} onDelete={onDeleteFake} />);
+			listItemInstance = rendered.root.findByType(SimpleListItem);
+		});
 		it('should write the message', () => {
-			expect(listItemInstance.props.children.props.children).to.equal(text)
-		})
+			expect(listItemInstance.props.children.props.children).to.equal(text);
+		});
 		it('should write the message in italic', () => {
-			expect(listItemInstance.props.children.type).to.equal("i")
-		})
+			expect(listItemInstance.props.children.type).to.equal('i');
+		});
 		it('should have a delete icon on the right', () => {
-			expect(listItemInstance.props.rightAddon.type).to.equal(DeleteSVGIcon)
-		})
+			expect(listItemInstance.props.rightAddon.type).to.equal(DeleteSVGIcon);
+		});
 		it('should act on a click on the delete icon', () => {
-			expect(listItemInstance.props.rightAddon.props.onClick).to.exist
-		})
+			expect(listItemInstance.props.rightAddon.props.onClick).to.exist;
+		});
 		it('should have a lock icon on the left', () => {
-			expect(listItemInstance.props.leftAddon.type).to.equal(LockSVGIcon)
-		})
+			expect(listItemInstance.props.leftAddon.type).to.equal(LockSVGIcon);
+		});
 		describe('click on the delete icon', () => {
 			beforeEach(() => {
-				listItemInstance.props.rightAddon.props.onClick()
-			})
+				listItemInstance.props.rightAddon.props.onClick();
+			});
 			it('should call onDelete function', () => {
-				expect(onDeleteFake).to.have.been.calledOnce
-			})
-		})
-	})
-})
+				expect(onDeleteFake).to.have.been.calledOnce;
+			});
+		});
+	});
+});
