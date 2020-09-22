@@ -18,13 +18,14 @@ export default function MessageItem({ onDelete, message }: MessageItemProps): Re
 			<SimpleListItem
 				rightAddon={
 					<DeleteSVGIcon
+						id="mi-delete-icon"
 						style={{
 							marginLeft: 'auto',
 						}}
 						onClick={handleDelete}
 					/>
 				}
-				leftAddon={isPrivate && <LockSVGIcon />}
+				leftAddon={isPrivate && <LockSVGIcon id="mi-lock-icon" />}
 				id={'message-item-' + message.id}
 			>
 				{isPrivate ? <i>{message.text}</i> : message.text}
