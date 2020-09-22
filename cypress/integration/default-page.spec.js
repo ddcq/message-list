@@ -36,4 +36,18 @@ context('Add a message', () => {
 		cy.get('#mi-delete-icon').should('exist');
 		cy.get('#mi-lock-icon').should('exist');
 	});
+	it('back to list', () => {
+		cy.get('#mli-create-message-btn').click();
+
+		cy.location('pathname').should('eq', '/message-create');
+
+		const testMessage = 'Cypress test message';
+		cy.get('#mc-text').type(testMessage);
+		cy.get('#mc-private-chk').click();
+		cy.get('#mc-back-btn').click();
+
+		cy.location('pathname').should('eq', '/');
+		cy.get('#message-item-1').should('not.exist');
+		cy.get('#mli-empty-list').should('exist');
+	});
 });
