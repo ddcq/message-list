@@ -28,15 +28,19 @@ export default function Messages(): ReactElement {
 			<Text type="headline-4">Messages</Text>
 
 			<DialogFooter>
-				<Button theme="secondary" onClick={() => dispatch(removeAllMessagesAsync())}>
+				<Button id="mli-delete-all-btn" theme="secondary" onClick={() => dispatch(removeAllMessagesAsync())}>
 					Supprimer tous les messages
 				</Button>
-				<Button theme="primary" onClick={() => router.push('/message-create')}>
+				<Button id="mli-create-message-btn" theme="primary" onClick={() => router.push('/message-create')}>
 					Créer un nouveau message
 				</Button>
 			</DialogFooter>
 			{messages && !!messages.length && <MessageList messages={messages} />}
-			{messages && !messages.length && <Text type="headline-5">Aucun message</Text>}
+			{messages && !messages.length && (
+				<Text type="headline-5" id="mli-empty-list">
+					Aucun message
+				</Text>
+			)}
 		</TextContainer>
 	);
 }
