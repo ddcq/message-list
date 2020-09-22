@@ -36,7 +36,11 @@ export default function Messages(): ReactElement {
 				</Button>
 			</DialogFooter>
 			{messages && !!messages.length && <MessageList messages={messages} />}
-			{messages && !messages.length && <Text type="headline-5">Aucun message</Text>}
+			{messages && !messages.length && (
+				<Text type="headline-5" id="mli-empty-list">
+					Aucun message
+				</Text>
+			)}
 		</TextContainer>
 	);
 }
