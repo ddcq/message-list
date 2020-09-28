@@ -1,5 +1,7 @@
 # Message List
 
+[![Build Status](https://travis-ci.org/ddcq/message-list.svg?branch=master)](https://travis-ci.org/ddcq/message-list)
+
 This application is a simple application to list messages and add new messages. It's based on [ReactMD](https://github.com/mlaursen/react-md), [Next.js](https://nextjs.org/), and Typescript.
 
 directories:
