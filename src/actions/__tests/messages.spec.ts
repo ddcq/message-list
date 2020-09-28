@@ -1,6 +1,8 @@
-import { expect } from 'chai';
+import chai from 'chai';
 import faker from 'faker';
 import sinon, { SinonExpectation, SinonStub } from 'sinon';
+import sinonChai from 'sinon-chai';
+
 import * as ApiMessages from '../../api/messages';
 import {
 	addMessage,
@@ -11,6 +13,8 @@ import {
 } from '../../store/messages/actions';
 import { Message, VISIBILITY } from '../../types';
 import { addMessageAsync, fetchMessagesAsync, removeAllMessagesAsync, removeMessageAsync } from '../messages';
+chai.use(sinonChai);
+const expect = chai.expect;
 
 describe('actions/messages', () => {
 	const sandbox = sinon.createSandbox();
