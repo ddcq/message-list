@@ -4,16 +4,16 @@ node_js:
 cache: npm
 
 install:
-	- npm install
+  - npm install
 
 script:
-	- npm test
-	- npm run build
-	- npx next export
+  - npm test
+  - npm run build
+  - npx next export
 
 deploy:
-	provider: pages
-	skip-cleanup: true
-	github-token: $GITHUB_TOKEN
-	on:
-		branch: gh-pages
+  provider: pages
+  skip-cleanup: true
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: gh-pages
